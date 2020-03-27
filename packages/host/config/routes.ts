@@ -24,8 +24,8 @@ const routes: IBestAFSRoute[] = [
             component: '@/pages/account/login/index',
           },
         ],
-      }
+      },
     ],
-  }
+  },
 ];
 export default routes;

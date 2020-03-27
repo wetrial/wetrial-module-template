@@ -6,7 +6,7 @@ import { Button, Form, Input, Table, Divider, Progress, Switch, Popconfirm } fro
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { ColumnType } from 'antd/es/table';
 import { convertListToFlat } from '@/utils';
-import WetrialhostPermissions from '@config/modules/wetrialhost';
+import WetrialhostPermissions from '../../index';
 import { StagedDict } from './prop.d';
 import { getList, remove } from './service';
 

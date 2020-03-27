@@ -6,6 +6,7 @@ import { BasicLayoutProps, DefaultFooter } from '@ant-design/pro-layout';
 // import { omit } from 'lodash';
 // import { UnAuthorizedException } from '@wetrial/core/exception';
 import { configUseFormTableFormatResult } from '@wetrial/hooks';
+import { Routes as TemplateRoutes } from '@wetrial/template';
 import { configIconUrl } from '@/components/IconFont';
 import defaultSettings from '@config/defaultSettings';
 import { getCurrentUser } from '@/services/account';
@@ -26,6 +27,13 @@ configUseFormTableFormatResult(data => {
 
 export function render(oldRender) {
   oldRender();
+}
+
+export function patchRoutes({ routes }: { routes: any[] }) {
+  const subAppRoutes = [...TemplateRoutes];
+  subAppRoutes.forEach(item => {
+    routes[0].routes.push(item);
+  });
 }
 
 export async function getInitialState() {

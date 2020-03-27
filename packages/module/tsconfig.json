@@ -13,6 +13,8 @@
     "skipLibCheck": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+    "rootDir": "src"
+  },
+  "exclude": ["node_modules", "lib", "es", "dist", "**/__tests__", "**/__test__"]
 }
