@@ -1,5 +1,5 @@
-import { get, put, post, del } from '@/utils/request';
-import { API_PREFIX } from '@/constants';
+import { get, put, post, del } from '@wetrial/core/request';
+import { API_PREFIX } from '@wetrial/core/constants';
 
 export async function getList(data) {
   return get(`${API_PREFIX}template/list/getList`, {

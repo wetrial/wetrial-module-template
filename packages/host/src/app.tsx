@@ -1,39 +1,83 @@
 import React from 'react';
 import { Link, history } from 'umi';
 import { stringify } from 'qs';
-import { ILayoutRuntimeConfig } from '@umijs/plugin-layout';
+import { ILayoutRuntimeConfig, IBestAFSRoute } from '@umijs/plugin-layout';
 import { BasicLayoutProps, DefaultFooter } from '@ant-design/pro-layout';
 // import { omit } from 'lodash';
 // import { UnAuthorizedException } from '@wetrial/core/exception';
 import { configUseFormTableFormatResult } from '@wetrial/hooks';
-import { Routes as TemplateRoutes } from '@wetrial/template';
+import { Routes as TemplateRoutes } from '@wetrial/sample';
 import { configIconUrl } from '@/components/IconFont';
 import defaultSettings from '@config/defaultSettings';
 import { getCurrentUser } from '@/services/account';
 import { ICurrentUser } from '@/models/account';
-import { getToken, clearPermissions, clearToken } from '@/utils/authority';
+import { getToken, clearToken } from '@wetrial/core/authority';
+import { configApiPreFix } from '@wetrial/core/constants';
+import {
+  addRequestInterceptor,
+  addResponseInterceptor,
+  commonRequestInterceptor,
+  commonResponseInterceptor,
+} from '@wetrial/core/request';
 import logo from './assets/logo.png';
 // import 'dayjs/locale/zh-cn';
 // import { notification } from 'antd';
 
 configIconUrl(defaultSettings.iconfontUrl);
-
 configUseFormTableFormatResult(data => {
   return {
     total: data.totalCount,
     list: data.items,
   };
 });
+addRequestInterceptor(...commonRequestInterceptor);
+addResponseInterceptor(...commonResponseInterceptor);
+configApiPreFix('/api/');
 
 export function render(oldRender) {
   oldRender();
 }
 
+const requireLoadRoute = (route: any) => {
+  if (route.component) {
+    debugger;
+    // eslint-disable-next-line
+    route.component = require(route.component).default;
+  }
+  if (route.routes && route.routes.length > 0) {
+    // eslint-disable-next-line no-param-reassign
+    route.routes = route.routes.map(item => requireLoadRoute(item));
+  }
+  return route;
+};
+
 export function patchRoutes({ routes }: { routes: any[] }) {
   const subAppRoutes = [...TemplateRoutes];
+
+  // routes[0].routes.unshift({
+  //   path: '/sample',
+  //   name: 'sample',
+  //   // exact: true,
+  //   routes: [
+  //     {
+  //       path: '/sample/list',
+  //       name: '列表',
+  //       exact: true,
+  //       component: require('@wetrial/sample/lib/pages/dashboard/index').default,
+  //     },
+  //     {
+  //       path: '/sample/list/edit/:id?',
+  //       exact: true,
+  //       component: require('@wetrial/sample/lib/pages/dashboard/index').default,
+  //     },
+  //   ],
+  // });
+
   subAppRoutes.forEach(item => {
-    routes[0].routes.push(item);
+    const newRoute = requireLoadRoute(item);
+    routes[0].routes.unshift(newRoute);
   });
+  console.log(routes);
 }
 
 export async function getInitialState() {
@@ -84,7 +128,6 @@ export const dva = {
 export const layout: ILayoutRuntimeConfig & BasicLayoutProps = {
   logout: () => {
     clearToken();
-    clearPermissions();
     const {
       location: { pathname },
     } = history;

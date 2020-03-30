@@ -1,13 +1,13 @@
 {
-  "name": "@wetrial/template",
+  "name": "@wetrial/sample",
   "version": "0.0.1",
   "description": "wetrial 模块化应用模块",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
+    "directory": "lib",
     "registry": "http://172.16.170.34:8000/"
   },
   "files": [
@@ -35,7 +35,7 @@
     "test": "father test",
     "test:cov": "father test --coverage",
     "compile": "tsc --declarationDir ./lib && tsc --declarationDir ./es",
-    "build": "father build && yarn compile"
+    "build": "father build"
   },
   "husky": {
     "hooks": {
@@ -71,11 +71,14 @@
     "use-merge-value": "*"
   },
   "devDependencies": {
+    "@umijs/preset-react": "^1.4.8",
     "father": "^2.29.2",
-    "typescript": "^3.8.3",
-    "@umijs/preset-react": "^1.4.8"
+    "typescript": "^3.8.3"
   },
   "author": "xiexingen",
   "email": "1002275364@qq.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@wetrial/core": "^2.1.1"
+  }
 }

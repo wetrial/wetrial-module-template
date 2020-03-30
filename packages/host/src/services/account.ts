@@ -1,5 +1,5 @@
-import { API_PREFIX } from '@/constants';
-import { get, post } from '@/utils/request';
+import { API_PREFIX } from '@wetrial/core/constants';
+import { get, post } from '@wetrial/core/request';
 
 export async function getCurrentUser() {
   return get(`${API_PREFIX}account/getCurrentUser`);

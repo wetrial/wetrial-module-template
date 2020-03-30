@@ -8,6 +8,7 @@ lerna-debug.log*
 packages/module/es
 packages/module/lib
 packages/module/dist
+.umi
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

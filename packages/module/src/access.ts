@@ -1,7 +1,6 @@
 /**
  * 请勿修改，只是为了模块下可以访问到umi的ts declare
  */
-export default {
-  namespace: 'template',
-  state: {},
-};
+export default function() {
+  return {};
+}

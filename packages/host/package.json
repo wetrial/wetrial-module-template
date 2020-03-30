@@ -29,10 +29,7 @@
   ],
   "dependencies": {
     "@ant-design/pro-layout": "^5.0.8",
-    "@wetrial/template": "^0.0.1"
-  },
-  "optionalDependencies": {
-    "puppeteer": "^2.1.1"
+    "@wetrial/sample": "^0.0.1"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -48,7 +45,7 @@
   "email": "1002275364@qq.com",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^3.8.3",
-    "@umijs/preset-react": "^1.4.8"
+    "@umijs/preset-react": "^1.4.8",
+    "typescript": "^3.8.3"
   }
 }

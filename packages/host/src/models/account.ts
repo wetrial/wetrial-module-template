@@ -1,6 +1,6 @@
 import extend from '@wetrial/core/model';
 import { login, getCurrentUser } from '@/services/account';
-import { setToken } from '@/utils/authority';
+import { setToken } from '@wetrial/core/authority';
 
 export interface ICurrentUser {
   avatar: string;

@@ -5,8 +5,8 @@ import { memoize } from 'lodash';
 import { Button, Form, Input, Table, Divider, Progress, Switch, Popconfirm } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { ColumnType } from 'antd/es/table';
-import { convertListToFlat } from '@/utils';
-import WetrialhostPermissions from '../../index';
+import { convertListToFlat } from '@wetrial/core/index';
+import WetrialhostPermissions from '../../../index';
 import { StagedDict } from './prop.d';
 import { getList, remove } from './service';
 

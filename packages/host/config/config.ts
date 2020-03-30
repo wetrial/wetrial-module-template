@@ -54,7 +54,7 @@ export default defineConfig({
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: themeConfig,
   define: {
-    REACT_APP_ENV: REACT_APP_ENV,
+    REACT_APP_ENV,
   },
   alias: {
     themes: join(__dirname, '../src/themes'),

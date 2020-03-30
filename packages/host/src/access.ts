@@ -1,5 +1,5 @@
 import { IKeyValue } from '@wetrial/core/types';
-import WetrialhostPermissions from '@wetrial/template';
+import WetrialhostPermissions from '@wetrial/sample';
 
 export default function(initialState: { permissions: string[] } = { permissions: [] }) {
   const { permissions } = initialState;

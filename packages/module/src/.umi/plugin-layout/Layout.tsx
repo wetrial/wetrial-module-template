@@ -9,7 +9,7 @@ export default (props) => {
     initialValue: {},
   }) || {};
   const userConfig = {
-    ...{'name':'@wetrial/template','theme':'light','locale':false,'showBreadcrumb':true,'title':'Wetrial'},
+    ...{'name':'@wetrial/sample','theme':'light','locale':false,'showBreadcrumb':true,'title':'Wetrial'},
     ...runtimeConfig
   };
   return React.createElement(require('D:/Work/Project/wetrial-module-template/node_modules/@umijs/plugin-layout/lib/layout/index.js').default, {

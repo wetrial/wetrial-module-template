@@ -231,8 +231,8 @@ effects: {
 },
 });`;
   // 接口模板
-  const serviceTemplate = `import { get,post } from '@/utils/request';
-import { API_PREFIX } from '@/constants';
+  const serviceTemplate = `import { get,post } from '@wetrial/core/request';
+import { API_PREFIX } from '@wetrial/core/constants';
 
 export async function GetPagedList(data){
     return await get({
@@ -287,7 +287,7 @@ export interface I${PascalPageName}EditProps extends IFormProps{
     .map(item => item.substring(0, 1).toUpperCase() + item.substr(1))
     .join('/');
   // 检测目录、文件是否存在,存在跳过生成
-  const folderFullPath = `./src/pages/${pagePath ? ParcalPath + '/' : ''}${PascalPageName}`;
+  const folderFullPath = `./src/pages/${pagePath ? `${ParcalPath}/` : ''}${PascalPageName}`;
   const utils = require('./utils');
   const exists = utils.checkExists(
     `${folderFullPath}/index.tsx`,
@@ -304,7 +304,7 @@ export interface I${PascalPageName}EditProps extends IFormProps{
   fs.mkdirSync(folderFullPath, { recursive: true }); // mkdir $1
   process.chdir(folderFullPath); // cd $1
 
-  fs.writeFileSync(`index.tsx`, pageTemplate); //tsx
+  fs.writeFileSync(`index.tsx`, pageTemplate); // tsx
   // fs.writeFileSync(`index.less`, lessTemplate); // scss
   fs.writeFileSync('service.ts', serviceTemplate); // service
   fs.writeFileSync('model.ts', modelTemplate); // model
@@ -313,5 +313,5 @@ export interface I${PascalPageName}EditProps extends IFormProps{
 }
 
 module.exports = {
-  generate: generate,
+  generate,
 };

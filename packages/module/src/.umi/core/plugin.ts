@@ -4,6 +4,10 @@ const plugin = new Plugin({
   validKeys: ['patchRoutes','rootContainer','render','onRouteChange','dva','getInitialState','locale','locale','layout',],
 });
 plugin.register({
+  apply: require('D:/Work/Project/wetrial-module-template/packages/module/src/.umi/plugin-access/rootContainer.ts'),
+  path: 'D:/Work/Project/wetrial-module-template/packages/module/src/.umi/plugin-access/rootContainer.ts',
+});
+plugin.register({
   apply: require('D:/Work/Project/wetrial-module-template/packages/module/src/.umi/plugin-dva/runtime.tsx'),
   path: 'D:/Work/Project/wetrial-module-template/packages/module/src/.umi/plugin-dva/runtime.tsx',
 });

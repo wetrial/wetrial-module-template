@@ -1,25 +1,31 @@
 import { IBestAFSRoute } from '@umijs/plugin-layout';
 
-const name = '@wetrial/template';
+const name = '@wetrial/sample';
 
-function dgPatchRoute(route: IBestAFSRoute) {
+function dgPatchRoute(route: IBestAFSRoute, parentPath: string = '') {
   const tmpRoute = route;
+  // 如果不是绝对路由，使用上层路由合并
+  if (tmpRoute.path && !tmpRoute.path.startsWith('/')) {
+    tmpRoute.path = `${parentPath}/${tmpRoute.path}`;
+  }
   if (Array.isArray(route.routes)) {
-    tmpRoute.routes = route.routes.map(item => dgPatchRoute(item));
+    tmpRoute.routes = route.routes.map(item => dgPatchRoute(item, route.path));
   } else if (tmpRoute.component) {
     // @ 相对于src目录,其他相对于pages
     if (tmpRoute.component.startsWith('@')) {
       // exp:'@/pages/account/login' ==> '@wetrial/blogs/pages/account/login'
-      tmpRoute.component = tmpRoute.component?.replace(/^@/, name);
+      tmpRoute.component = tmpRoute.component?.replace(/^@/, `${name}/lib`);
     } else {
       // 只支持下面两种形式
       // exp:'account/login' ==> '@wetrial/blogs/pages/account/login'
       // exp:'../account/login' ==> '@wetrial/blogs/pages/account/login'
-      tmpRoute.component = tmpRoute.component?.replace(/^()/, name);
+      // tmpRoute.component = tmpRoute.component?.replace(/^()/, name);
+
+      // eslint-disable-next-line no-lonely-if
       if (/^\w/.test(tmpRoute.component)) {
-        tmpRoute.component = `${name}/${tmpRoute.component}`;
+        tmpRoute.component = `${name}/lib/pages/${tmpRoute.component}`;
       } else {
-        tmpRoute.component = tmpRoute.component?.replace(/^\.\./, name);
+        tmpRoute.component = tmpRoute.component?.replace(/^(\.\.\/)/, `${name}/lib/pages/`);
       }
     }
   }
@@ -31,13 +37,7 @@ function dgPatchRoute(route: IBestAFSRoute) {
  * @param routes 路由|路由列表
  */
 function patchRoutePath(routes: IBestAFSRoute[]): IBestAFSRoute[] {
-  let patchedRoutes;
-  if (Array.isArray(routes)) {
-    patchedRoutes = routes.map(route => dgPatchRoute(route));
-  } else {
-    patchedRoutes = [dgPatchRoute(routes)];
-  }
-  return patchedRoutes;
+  return routes.map(route => dgPatchRoute(route));
 }
 
 /**
@@ -78,7 +78,7 @@ const routes: IBestAFSRoute[] = [
         name: '看板',
         // icon: 'dashboard',
         access: Permissions.template.dashboard.index,
-        component: '@/pages/template/dashboard/index',
+        component: 'dashboard/index',
       },
       {
         path: 'sample',
@@ -94,12 +94,12 @@ const routes: IBestAFSRoute[] = [
             path: 'list',
             name: '列表',
             access: Permissions.template.sample.list.index,
-            component: '@/pages/template/sample/list/index',
+            component: 'sample/list/index',
             exact: true,
           },
           {
             path: 'list/edit/:id?',
-            component: '@/pages/template/sample/list/edit',
+            component: 'sample/list/edit',
             access: Permissions.template.sample.list.edit,
             exact: true,
           },

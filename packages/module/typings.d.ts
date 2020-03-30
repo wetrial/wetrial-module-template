@@ -14,22 +14,24 @@ declare module '*.json';
 
 declare const REACT_APP_ENV: 'test' | 'dev' | 'pre' | false;
 
-declare module 'umi' {
-  interface AccessProps {
-    accessible: boolean;
-    fallback?: React.ReactNode;
-  }
+// declare module 'umi' {
+//   interface AccessProps {
+//     accessible: boolean;
+//     fallback?: React.ReactNode;
+//   }
 
-  export function useModel(
-    model: string,
-  ): {
-    refresh(): Promise<void>;
-    initialState: any;
-    loading: boolean;
-    error: Error | undefined;
-  };
+//   export * from 'umi';
 
-  export function Access(props: React.PropsWithChildren<AccessProps>): JSX.Element;
+//   export function useModel(
+//     model: string,
+//   ): {
+//     refresh(): Promise<void>;
+//     initialState: any;
+//     loading: boolean;
+//     error: Error | undefined;
+//   };
 
-  export function useAccess(): boolean;
-}
+//   export function Access(props: React.PropsWithChildren<AccessProps>): JSX.Element;
+
+//   export function useAccess(): boolean;
+// }

@@ -1,6 +1,6 @@
 import { stringify } from 'qs';
 import { notification, Progress } from 'antd';
-import { get } from './request';
+import { get } from '@wetrial/core/request';
 import React from 'react';
 
 /**
@@ -82,8 +82,7 @@ export const downloadFile = ({
   const downloadUrl =
     url.indexOf('?') !== -1 ? `${url}&${stringify(data)}` : `${url}?${stringify(data)}`;
 
-  return get({
-    url: downloadUrl,
+  return get(downloadUrl, {
     showTip: false,
     responseType: 'arraybuffer',
     onDownloadProgress,

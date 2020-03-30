@@ -3,7 +3,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { useParams, history } from 'umi';
 import { Form, Row, Col, Input, Switch, Slider, Button, Skeleton } from 'antd';
 import { useRequest } from '@wetrial/hooks';
-import { FORM_SINGLE_LAYOUT, FORM_TWO_LAYOUT, COL_LAYOUT } from '@/constants';
+import { FORM_SINGLE_LAYOUT, FORM_TWO_LAYOUT, COL_LAYOUT } from '@wetrial/core/constants';
 import { getItem, create, update } from './service';
 
 export default () => {

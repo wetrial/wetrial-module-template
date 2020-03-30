@@ -26,7 +26,7 @@ import { Form, Input, Button, Checkbox, Row, Col, PageHeader } from 'antd';
 import { connect } from 'umi';
 import { FormComponent, backRouter } from 'wetrial';
 import { required, getRegex, getRange } from '@wetrial/validation';
-import { FORM_SINGLE_LAYOUT } from '@/constants';
+import { FORM_SINGLE_LAYOUT } from '@wetrial/core/constants';
 import Authorized from '@/utils/Authorized'
 // import Permissions from '@config/permissions';
 
@@ -150,7 +150,7 @@ export default ${PascalPageName}Edit`;
     .join('/');
 
   // 检测目录、文件是否存在,存在跳过生成
-  const folderFullPath = `./src/pages/${pagePath ? ParcalPath + '/' : ''}${PascalPageName}`;
+  const folderFullPath = `./src/pages/${pagePath ? `${ParcalPath}/` : ''}${PascalPageName}`;
 
   // 检测是否有model、props、service等文件
   const baseFileExists = utils.checkExists(
@@ -175,11 +175,11 @@ export default ${PascalPageName}Edit`;
   fs.mkdirSync(folderFullPath, { recursive: true }); // mkdir $1
   process.chdir(folderFullPath); // cd $1
 
-  fs.writeFileSync(`edit.tsx`, pageTemplate); //tsx
+  fs.writeFileSync(`edit.tsx`, pageTemplate); // tsx
   // fs.writeFileSync(`edit.less`, lessTemplate); // scss
   process.exit(0);
 }
 
 module.exports = {
-  generate: generate,
+  generate,
 };
